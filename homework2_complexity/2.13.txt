@@ -1,0 +1,58 @@
+a)
+T(n) = | O(1),              n = 0
+       | T(n - 1) + O(1),   n >= 1
+
+T(n) <= T(n - 1) + C <=
+     <= T(n - 2) + C + C <=
+     <= T(n - 3) + C + C + C <=
+     ......
+     <= T(n - n) + C n <=
+     <= C (n + 1) <= O(n)
+
+d)
+T(n) = | O(1),              n <= a, a > 1
+       | a T(n - a) + O(1), n >= a
+
+n = m a -> m = n / a
+
+T(n) <= a T(m a - a) + C <=
+     <= a (a T(m a - 2 a) + C) + C =
+     = a^2 T(m a - 2 a) + a C + C <=
+     <= a^2 (a T(m a - 3 a) + C) + a C + C =
+     = a^3 T(m a - 3 a) + a^2 C + a C + C <=
+     ........
+     <= a^m T(m a - m a) + C(1 + a + a^2 + ... + a^(m - 1)) =
+     = a^m T(0) + C (1 - a^(m-1) / 1 - a) = C (a^m + (1 - a^(m-1)) / (1 - a)) <=
+     <= O(a^m) <= O(a^(n / a))
+
+g)
+t(n) = | O(1),                n = 1
+       | a T([n / a]) + O(1), n >= 2, a >= 2
+
+n = a^m -> m = log_a(n)
+
+T(n) <= a T([n / a]) + C = a T(a^{m-1}) <=
+     <= a (a T(a^{m-2}) + C) + C =
+     = a^2 T(a^{m - 2}) + C (a + 1) <=
+     <= a^2 (a T(a^{m - 3}) + C) + C (a + 1) =
+     = a^3 T(a^{m - 3}) + C (1 + a + a^2) <=
+     .......
+     <= a^m T(a^{m - m}) + C (1 + a + a^2 + ... + a^{m - 1}) =
+     = a^m T(a^0) + C ((1 - a^{m - 1}) / (1 - a)) = O(a^m) =
+     = O(n)
+
+h)
+t(n) = | O(1),                n = 1
+       | a T([n / a]) + O(n), n >= 2, a >= 2
+
+n = a^m -> m = log_a(n)
+
+T(n) <= a T([n / a]) + C n = a T(a^{m - 1}) + C a^m <=
+     <= a (a T(a^{m - 2}) + C a^{m - 1}) + C a^m =
+     = a^2 T(a^{m - 2}) + C(a^m + a^m) <=
+     <= a^2 (a T(a^{m - 3}) + C a^{m - 2}) + C(a^m + a^m) =
+     = a^3 T(a^{m - 3}) + C(a^m + a^m + a^m) <=
+     ......
+     <= a^m T(a^{m - m}) + C (m * a^m) <=
+     <= C a^m + C (m * a^m) = O(m * a^m) =
+     = O(n log_a(n))
